@@ -19,20 +19,17 @@ const createRouter = function (collection) {
 
     router.post('/', (req, res) => {
         const newData = req.body;
-        console.log(req.body)
         collection
-            .insertOne(newData)
-            // .then ((result) => {
-            //     res.json(result.ops[0])
-            // })
-            .then(() => collection.find().toArray())
-            .then((docs) => res.json(docs))
-            .catch((err) => {
-                console.error(err);
-                res.status(500);
-                res.json({ status: 500, error: err });
-            });
-    });
+          .insertOne(newData)
+          .then((result) => {
+            res.json(result.ops[0])
+          })
+          .catch((err) => {
+            console.error(err);
+            res.status(500);
+            res.json({ status: 500, error: err });
+          });
+      });
 
     router.delete('/:id', (req, res) => {
         const id = req.params.id;
